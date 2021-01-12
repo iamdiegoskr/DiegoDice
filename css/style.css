@@ -5,7 +5,7 @@
     }
     
     body {
-        background: #1f1b1b;
+        background: #110331;
     }
     
     .main {
@@ -27,7 +27,40 @@
         grid-template-rows: 1fr 1fr;
         height: 380px;
         overflow: hidden;
+        position: relative;
         width: 380px;
+    }
+    
+    .game-container .center-play {
+        align-items: center;
+        background-color: #110331;
+        border-radius: 50%;
+        border: 8px solid white;
+        display: flex;
+        height: 180px;
+        justify-content: center;
+        position: absolute;
+        right: calc(50% - 90px);
+        top: calc(50% - 90px);
+        width: 180px;
+    }
+    /* .center-play-icon {
+        background-image: url('../img/playicon2.png');
+        display: inline-block;
+        height: 64px;
+        width: 64px;
+    }
+     */
+    
+    .play-icon {
+        font-size: 5.4rem;
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    .play-icon:hover {
+        font-size: 6.4rem;
+        color: #ff5454;
     }
     
     .green {
