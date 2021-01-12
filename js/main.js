@@ -1,0 +1,3 @@
+function startGame() {
+    alert("skeit")
+}

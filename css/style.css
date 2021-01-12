@@ -103,3 +103,8 @@
     .blue.light {
         background-color: #4a36f2;
     }
+    
+    .btn-play {
+        border: none;
+        background: transparent;
+    }
