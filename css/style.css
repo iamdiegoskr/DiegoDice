@@ -44,13 +44,6 @@
         top: calc(50% - 90px);
         width: 180px;
     }
-    /* .center-play-icon {
-        background-image: url('../img/playicon2.png');
-        display: inline-block;
-        height: 64px;
-        width: 64px;
-    }
-     */
     
     .play-icon {
         font-size: 5.4rem;
@@ -68,7 +61,11 @@
         background-color: #19b239;
         border-radius: 100% 0 0 0;
         border: 8px solid #2e8f05;
-        /* box-shadow: 1px 2px 23px 0px #000000;*/
+        transition: .2s;
+    }
+    
+    .green.light {
+        background-color: #22f427;
     }
     
     .red {
@@ -76,6 +73,11 @@
         background-color: #ac122f;
         border-radius: 0 100% 0 0;
         border: 8px solid #85032e;
+        transition: .2s;
+    }
+    
+    .red.light {
+        background-color: #f81515;
     }
     
     .purple {
@@ -83,6 +85,11 @@
         background-color: #9a09a4;
         border-radius: 0 0 0 100%;
         border: 8px solid #830385;
+        transition: .2s;
+    }
+    
+    .purple.light {
+        background-color: #fb17ff;
     }
     
     .blue {
@@ -90,4 +97,9 @@
         background-color: #0b0f79;
         border-radius: 0 0 100% 0;
         border: 8px solid #010856;
+        transition: .2s;
+    }
+    
+    .blue.light {
+        background-color: #4a36f2;
     }
