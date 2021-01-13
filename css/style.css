@@ -52,8 +52,10 @@
     }
     
     .play-icon:hover {
-        font-size: 6.4rem;
+        /* font-size: 6.4rem; */
         color: #ff5454;
+        transform: rotate(1.0turn);
+        transition: .3s;
     }
     
     .green {
@@ -104,7 +106,6 @@
         background-color: #4a36f2;
     }
     
-    .btn-play {
-        border: none;
-        background: transparent;
+    .hide {
+        display: none;
     }
