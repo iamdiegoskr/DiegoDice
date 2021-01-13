@@ -19,7 +19,7 @@ class Game {
     initialize() {
         this.chooseColor = this.chooseColor.bind(this);
         btnPlay.classList.toggle('hide')
-        this.level = 10;
+        this.level = 1;
         this.colors = [
             green,
             red,
@@ -119,40 +119,52 @@ class Game {
 
     //Usuario elige color y se valida
     chooseColor(ev) {
-
         const color = ev.target.dataset.color;
         const numberColor = this.ColortoNumber(color);
-
         this.illuminateColor(numberColor);
-
         if (numberColor === this.sequence[this.sublevel]) {
-
             this.sublevel++;
-
             if (this.sublevel === this.level) {
-
                 this.level++;
-
                 this.removeClickEvents();
-
                 if (this.level === LAST_LEVEL + 1) {
-                    //WIN
+                    this.userWin();
                 } else {
-
-                    setTimeout(() => {
-                        this.nextLevel();
-                    }, 1500);
-
-
+                    this.userContinue(this.level);
                 }
-
             }
-
         } else {
-            //lost
+            this.userLost();
         }
-
     }
+
+    userContinue(level) {
+        swal("Correcto", "Pasas al nivel " + level, "success")
+            .then(() => {
+                setTimeout(() => {
+                    this.nextLevel();
+                }, 1000);
+            })
+    }
+
+    //usuario gano
+    userWin() {
+        //devuelve una promesa
+        swal("Felicitaciones", "Eres el rey del juego", "success")
+            .then(() => {
+                this.initialize();
+            })
+    }
+
+    //usuario perdio
+    userLost() {
+        swal("Ups", "Has perdido,intenta de nuevo", "error")
+            .then(() => {
+                this.removeClickEvents()
+                this.initialize();
+            })
+    }
+
 
     //Activar audio
     turnOnSound(color) {
