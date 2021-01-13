@@ -3,7 +3,9 @@ const red = document.getElementById('red');
 const purple = document.getElementById('purple');
 const blue = document.getElementById('blue');
 const btnPlay = document.getElementById('button-play');
+const spanLevel = document.getElementById('level-score');
 const LAST_LEVEL = 10;
+const FIRST_LEVEL = 1;
 
 
 class Game {
@@ -18,6 +20,7 @@ class Game {
 
     initialize() {
         this.chooseColor = this.chooseColor.bind(this);
+        spanLevel.innerHTML = FIRST_LEVEL;
         btnPlay.classList.toggle('hide')
         this.level = 1;
         this.colors = [
@@ -106,7 +109,8 @@ class Game {
     //agregar eventos de escucha a los botones
     AddClickEvents() {
         this.colors.forEach((color) => {
-            color.addEventListener("click", this.chooseColor)
+            color.addEventListener("click", this.chooseColor);
+            this.buttonsPointer();
         })
     }
 
@@ -114,6 +118,19 @@ class Game {
     removeClickEvents() {
         this.colors.forEach((color) => {
             color.removeEventListener("click", this.chooseColor);
+            this.removeButtonsPointer();
+        })
+    }
+
+    buttonsPointer() {
+        this.colors.forEach((btnColor) => {
+            btnColor.classList.add('pointer');
+        })
+    }
+
+    removeButtonsPointer() {
+        this.colors.forEach((btnColor) => {
+            btnColor.classList.remove('pointer');
         })
     }
 
@@ -139,6 +156,7 @@ class Game {
     }
 
     userContinue(level) {
+        spanLevel.innerHTML = this.level;
         swal("Correcto", "Pasas al nivel " + level, "success")
             .then(() => {
                 setTimeout(() => {

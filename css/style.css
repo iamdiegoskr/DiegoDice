@@ -14,6 +14,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
     }
     
     .game-container {
@@ -108,4 +109,44 @@
     
     .hide {
         display: none;
+    }
+    
+    .max-score-container,
+    .level-container {
+        color: #fff;
+        height: auto;
+        margin-bottom: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .level-container {
+        margin-top: 28px;
+    }
+    
+    .level-container h2 {
+        font-size: 1.8rem;
+    }
+    
+    .level-container span {
+        font-size: 2.2rem;
+        color: #f8ab2e;
+        margin-left: 4px;
+    }
+    
+    .max-score-container h2 {
+        font-size: 3rem;
+    }
+    
+    .max-score-container span {
+        font-size: 4.6rem;
+        margin-left: 8px;
+        color: #e74c7c;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+    
+    .pointer {
+        cursor: pointer;
     }

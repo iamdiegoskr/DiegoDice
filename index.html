@@ -12,6 +12,9 @@
 
 <body>
     <main class="main">
+        <div class="max-score-container">
+            <h2 class="max-score">Puntaje maximo : </h2><span id="max-score">0</span>
+        </div>
         <div class="game-container">
             <div class="green" data-color="green" id="green"></div>
             <div class="red" data-color="red" id="red"></div>
@@ -20,6 +23,9 @@
             <div class="center-play">
                 <a href="#" id="button-play" onclick="startGame()"><i class="fas fa-play-circle play-icon"></i></a>
             </div>
+        </div>
+        <div class="level-container">
+            <h2 class="level">Level : </h2><span id="level-score">1</span>
         </div>
     </main>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
