@@ -10,18 +10,22 @@ class Game {
     constructor() {
         this.initialize();
         this.generateSequence();
-        this.nextLevel();
+        setTimeout(() => {
+            this.nextLevel();
+        }, 500);
+
     }
 
     initialize() {
+        this.chooseColor = this.chooseColor.bind(this);
         btnPlay.classList.toggle('hide')
         this.level = 10;
-        this.colors = {
+        this.colors = [
             green,
             red,
             purple,
             blue
-        }
+        ]
         this.sounds = {
             green: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
             red: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
@@ -30,14 +34,19 @@ class Game {
         }
     }
 
+    //generador de secuencia o patron
     generateSequence() {
         this.sequence = new Array(LAST_LEVEL).fill(0).map(n => Math.floor(Math.random() * 4))
     }
 
+    //siguiente nivel
     nextLevel() {
-        this.turnOnSequence()
+        this.sublevel = 0;
+        this.turnOnSequence();
+        this.AddClickEvents();
     }
 
+    //pasar numero a color
     numberToColor(num) {
         switch (num) {
             case 0:
@@ -51,6 +60,7 @@ class Game {
         }
     }
 
+    //pasar color a numero
     ColortoNumber(color) {
         switch (color) {
             case 'green':
@@ -64,22 +74,20 @@ class Game {
         }
     }
 
-
+    //iluminar la secuencia
     turnOnSequence() {
 
         for (let i = 0; i < this.level; i++) {
-
-            const color = this.numberToColor(this.sequence[i]);
-            console.log(color);
-
+            const indexColor = this.sequence[i];
             setTimeout(() => {
-                this.illuminateColor(color);
+                this.illuminateColor(indexColor);
             }, 1000 * i);
 
         }
 
     }
 
+    //agregar iluminacion
     illuminateColor(color) {
         this.colors[color].classList.add('light');
 
@@ -90,36 +98,83 @@ class Game {
         }, 350);
     }
 
+    //eliminar iluminacion
     removeColor(color) {
         this.colors[color].classList.remove('light');
     }
 
-    turnOnSound(color) {
-        switch (color) {
-            case 'green':
-                this.sounds.green.play();
-                break;
-            case 'red':
-                this.sounds.red.play();
-                break;
-            case 'purple':
-                this.sounds.purple.play();
-                break;
-            case 'blue':
-                this.sounds.blue.play();
+    //agregar eventos de escucha a los botones
+    AddClickEvents() {
+        this.colors.forEach((color) => {
+            color.addEventListener("click", this.chooseColor)
+        })
+    }
+
+    //eliminar eventos de escucha a los botones
+    removeClickEvents() {
+        this.colors.forEach((color) => {
+            color.removeEventListener("click", this.chooseColor);
+        })
+    }
+
+    //Usuario elige color y se valida
+    chooseColor(ev) {
+
+        const color = ev.target.dataset.color;
+        const numberColor = this.ColortoNumber(color);
+
+        this.illuminateColor(numberColor);
+
+        if (numberColor === this.sequence[this.sublevel]) {
+
+            this.sublevel++;
+
+            if (this.sublevel === this.level) {
+
+                this.level++;
+
+                this.removeClickEvents();
+
+                if (this.level === LAST_LEVEL + 1) {
+                    //WIN
+                } else {
+
+                    setTimeout(() => {
+                        this.nextLevel();
+                    }, 1500);
+
+
+                }
+
+            }
+
+        } else {
+            //lost
         }
 
+    }
+
+    //Activar audio
+    turnOnSound(color) {
+        switch (color) {
+            case 0:
+                this.sounds.green.play();
+                break;
+            case 1:
+                this.sounds.red.play();
+                break;
+            case 2:
+                this.sounds.purple.play();
+                break;
+            case 3:
+                this.sounds.blue.play();
+        }
     }
 
 
 }
 
-
-
-
-
-
-
+//Comienza el juego
 function startGame() {
     window.game = new Game();
 }
