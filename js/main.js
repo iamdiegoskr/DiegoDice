@@ -15,7 +15,7 @@ class Game {
 
     initialize() {
         btnPlay.classList.toggle('hide')
-        this.level = 1;
+        this.level = 10;
         this.colors = {
             btnGreen,
             btnRed,
@@ -33,6 +33,53 @@ class Game {
     generateSequence() {
         this.sequence = new Array(LAST_LEVEL).fill(0).map(n => Math.floor(Math.random() * 4))
     }
+
+    nextLevel() {
+        this.turnOnSequence()
+    }
+
+    numberToColor(num) {
+        switch (num) {
+            case 0:
+                return 'green';
+            case 1:
+                return 'red';
+            case 2:
+                return 'purple';
+            case 3:
+                return 'blue';
+        }
+    }
+
+    ColortoNumber(color) {
+        switch (color) {
+            case 'green':
+                return 0;
+            case 'red':
+                return 1;
+            case 'purple':
+                return 2;
+            case 'blue':
+                return 3;
+        }
+    }
+
+
+    turnOnSequence() {
+
+        for (let i = 0; i < this.level; i++) {
+
+            const color = this.numberToColor(this.sequence[i]);
+            console.log(color);
+
+        }
+
+    }
+
+    illuminateColor(color) {
+
+    }
+
 
 }
 
