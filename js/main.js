@@ -4,8 +4,9 @@ const purple = document.getElementById('purple');
 const blue = document.getElementById('blue');
 const btnPlay = document.getElementById('button-play');
 const spanLevel = document.getElementById('level-score');
-const LAST_LEVEL = 10;
+const LAST_LEVEL = 1000;
 const FIRST_LEVEL = 1;
+
 
 
 class Game {
@@ -23,6 +24,7 @@ class Game {
         spanLevel.innerHTML = FIRST_LEVEL;
         btnPlay.classList.toggle('hide')
         this.level = 1;
+        this.points = 0;
         this.colors = [
             green,
             red,
@@ -176,6 +178,7 @@ class Game {
 
     //usuario perdio
     userLost() {
+
         swal("Ups", "Has perdido,intenta de nuevo", "error")
             .then(() => {
                 this.removeClickEvents()
