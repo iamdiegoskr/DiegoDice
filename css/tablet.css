@@ -1,0 +1,20 @@
+.max-score-container h2 {
+    font-size: 2rem;
+}
+
+.max-score-container span {
+    font-size: 3.6rem;
+}
+
+.game-container {
+    width: 320px;
+    height: 320px;
+}
+
+.level-container h2 {
+    font-size: 1.4rem;
+}
+
+.level-container span {
+    font-size: 2rem;
+}
