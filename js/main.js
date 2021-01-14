@@ -4,6 +4,7 @@ const purple = document.getElementById('purple');
 const blue = document.getElementById('blue');
 const btnPlay = document.getElementById('button-play');
 const spanLevel = document.getElementById('level-score');
+const spanMaxScore = document.getElementById('max-score');
 const LAST_LEVEL = 1000;
 const FIRST_LEVEL = 1;
 
@@ -20,6 +21,8 @@ class Game {
     }
 
     initialize() {
+        this.maxScore = localStorage.getItem('points');
+        if (this.maxScore != null) spanMaxScore.innerHTML = this.maxScore;
         this.chooseColor = this.chooseColor.bind(this);
         spanLevel.innerHTML = FIRST_LEVEL;
         btnPlay.classList.toggle('hide')
@@ -145,6 +148,7 @@ class Game {
             this.sublevel++;
             if (this.sublevel === this.level) {
                 this.level++;
+                this.points += 3;
                 this.removeClickEvents();
                 if (this.level === LAST_LEVEL + 1) {
                     this.userWin();
@@ -178,12 +182,21 @@ class Game {
 
     //usuario perdio
     userLost() {
+        if (this.points > this.maxScore) {
+            localStorage.setItem("points", this.points);
+            swal('DiegoDice', `Mejoraste tu puntuacion`, 'error')
+                .then(() => {
+                    this.removeClickEvents()
+                    this.initialize();
+                })
+        } else {
+            swal('DiegoDice', `Has perdido,sigue intentando`, 'error')
+                .then(() => {
+                    this.removeClickEvents()
+                    this.initialize();
+                })
+        }
 
-        swal("Ups", "Has perdido,intenta de nuevo", "error")
-            .then(() => {
-                this.removeClickEvents()
-                this.initialize();
-            })
     }
 
 
@@ -211,3 +224,10 @@ class Game {
 function startGame() {
     window.game = new Game();
 }
+
+
+(function() {
+    let maxScore = localStorage.getItem('points');
+
+    if (maxScore != null) spanMaxScore.innerHTML = maxScore;
+})();
